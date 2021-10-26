@@ -24,6 +24,18 @@ class Node:
             self.paths.append(self.top)
 
 
+class CornerNode:
+    def __init__(self):
+        self.value = 0
+        self.paths = []
+
+
+class EdgeNode:
+    def __init__(self, parent, config):
+        self.value = parent.value - config['gap_penalty']
+        self.paths = [parent]
+
+
 def trim_sequences(seq_1, seq_2):
     """
     If called after checking sequences for equality, should work correctly.

@@ -1,4 +1,4 @@
-from src.matrix import Node
+from src.matrix import Node, Direction
 
 default_config = {
     "same_award": 2,
@@ -19,6 +19,6 @@ def test_compute_node_value():
     n4 = Node(n1, n2, n3, default_config)
     n4.compute_value("K", "K")
     assert n4.value == 6
-    assert len(n4.paths) == 2
-    assert n1 in n4.paths
-    assert n2 in n4.paths
+    assert len(n4.directions) == 2
+    assert Direction.LEFT in n4.directions
+    assert Direction.DIAGONAL in n4.directions

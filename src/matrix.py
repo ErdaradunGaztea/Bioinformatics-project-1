@@ -22,6 +22,8 @@ class Node:
             self.paths.append(self.diag)
         if top_value == self.value:
             self.paths.append(self.top)
+        
+        return self
 
 
 class CornerNode:

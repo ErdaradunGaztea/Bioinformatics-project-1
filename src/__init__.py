@@ -1,1 +1,1 @@
-from matrix import build_matrix, trim_sequences
+from src.matrix import build_matrix, trim_sequences

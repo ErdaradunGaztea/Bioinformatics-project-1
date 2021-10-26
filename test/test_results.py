@@ -10,8 +10,17 @@ default_config = {
     "max_seq_length": 10000,
     "max_number_paths": 100
 }
+modified_config = {
+    "same_award": 3,
+    "gap_penalty": 2,
+    "difference_penalty": 3,
+    "max_seq_length": 10000,
+    "max_number_paths": 100
+}
 seq_1 = "KY"
 seq_2 = "MEI"
+seq_3 = "PAAD"
+seq_4 = "MAAR"
 
 extract_value = np.vectorize(lambda x: x.value)
 
@@ -27,5 +36,14 @@ def test_matrix():
 
 def test_score():
     matrix = build_matrix(seq_1, seq_2, default_config)
-    _, score = follow_path(matrix)
+    _, score = follow_path(matrix, seq_1, seq_2, default_config)
     assert score == -5
+
+
+def test_paths():
+    matrix = build_matrix(seq_3, seq_4, modified_config)
+    paths, score = follow_path(matrix, seq_3, seq_4, modified_config)
+    assert len(paths) == 1
+    assert paths[0].seq_1 == "PAAD"
+    assert paths[0].seq_2 == "MAAR"
+    assert score == 0

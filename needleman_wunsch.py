@@ -1,9 +1,10 @@
+import sys
 from argparse import ArgumentParser
 
-from src.extend_paths import extend_paths
-from src.path import follow_path, Path
 from src.config import parse_config
+from src.extend_paths import extend_paths
 from src.matrix import trim_sequences, build_matrix
+from src.path import follow_path, Path
 from src.read_sequence import read_sequence
 from src.write_paths import write_paths
 
@@ -18,6 +19,8 @@ if __name__ == "__main__":
     seq_1 = read_sequence(args.seq1)
     seq_2 = read_sequence(args.seq2)
     config = parse_config(args.config)
+
+    sys.setrecursionlimit(config['max_seq_length'] * 2)
 
     # Default values when sequences are identical.
     paths = [Path(seq_1, seq_2)]

@@ -55,3 +55,4 @@ def test_multiple_paths():
     assert len(paths) == 9
     assert score == 0
     assert "P-AA-D" in [path.seq_1 for path in paths]
+    assert "MAAR" in [path.seq_2 for path in paths]

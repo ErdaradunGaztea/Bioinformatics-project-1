@@ -7,9 +7,9 @@ def identity(x): return x
 
 
 class Path:
-    def __init__(self):
-        self.seq_1 = ""
-        self.seq_2 = ""
+    def __init__(self, seq_1="", seq_2=""):
+        self.seq_1 = seq_1
+        self.seq_2 = seq_2
 
     def append_bases(self, base_1, base_2):
         self.seq_1 = base_1 + self.seq_1

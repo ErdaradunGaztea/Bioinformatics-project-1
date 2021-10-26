@@ -3,5 +3,5 @@ def write_paths(filename, paths, score):
         f.write("SCORE = {0}\n".format(score))
         for path in paths:
             f.write("\n")
-            f.write(path.seq_1 + "\n")
-            f.write(path.seq_2 + "\n")
+            f.write(str(path.seq_1) + "\n")
+            f.write(str(path.seq_2) + "\n")

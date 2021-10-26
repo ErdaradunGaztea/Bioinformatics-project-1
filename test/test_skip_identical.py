@@ -1,4 +1,4 @@
-from src import build_matrix, trim_sequences
+from src.matrix import build_matrix, trim_sequences
 
 default_config = {
     "same_award": 2,

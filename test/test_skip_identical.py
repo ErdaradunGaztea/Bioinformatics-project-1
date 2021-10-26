@@ -24,7 +24,9 @@ def test_trimmed_sequences():
     """
     Identical pre- and suffixes are removed.
     """
-    seq_1_trimmed, seq_3_trimmed = trim_sequences(seq_1, seq_3)
+    seq_1_trimmed, seq_3_trimmed, start_index, end_index = trim_sequences(seq_1, seq_3)
+    assert start_index == 9
+    assert end_index == 9
     assert seq_1_trimmed == "YRNECETCDIYLRTINLW"
     assert seq_3_trimmed == "WRLQLFHWCTHTFIFFWR"
 
@@ -33,6 +35,8 @@ def test_no_trim_sequences():
     """
     Sequences can remain not trimmed when first and last bases are different.
     """
-    seq_1_trimmed, seq_2_trimmed = trim_sequences(seq_1, seq_2)
+    seq_1_trimmed, seq_2_trimmed, start_index, end_index = trim_sequences(seq_1, seq_2)
+    assert start_index == 0
+    assert end_index == 0
     assert seq_1_trimmed == seq_1
     assert seq_2_trimmed == seq_2

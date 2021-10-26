@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Node:
     def __init__(self, left, diag, top, config):
         self.value = 0
@@ -22,7 +25,7 @@ class Node:
             self.paths.append(self.diag)
         if top_value == self.value:
             self.paths.append(self.top)
-        
+
         return self
 
 
@@ -68,3 +71,22 @@ def trim_sequences(seq_1, seq_2):
 def build_matrix(seq_1, seq_2, config):
     if seq_1 == seq_2:
         return None
+
+    seq_1_trim, seq_2_trim, start_index, end_index = trim_sequences(seq_1, seq_2)
+
+    nodes = np.empty((len(seq_1_trim) + 1, len(seq_2_trim) + 1), dtype=Node)
+    nodes[0, 0] = CornerNode()
+    for index in range(len(seq_1_trim)):
+        nodes[1 + index, 0] = EdgeNode(nodes[index, 0], config)
+    for index in range(len(seq_2_trim)):
+        nodes[0, 1 + index] = EdgeNode(nodes[0, index], config)
+
+    # build actual matrix
+    # could be optimized, as we know from trimming that the first and the last elements of both seq's are different
+    for row in range(len(seq_1_trim)):
+        for column in range(len(seq_2_trim)):
+            nodes[row + 1, column + 1] = Node(
+                nodes[row + 1, column], nodes[row, column], nodes[row, column + 1], config
+            ).compute_value(seq_1_trim[row], seq_2_trim[column])
+
+    return nodes

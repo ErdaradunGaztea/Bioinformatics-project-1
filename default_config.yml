@@ -1,0 +1,5 @@
+same_award: 2
+gap_penalty: 1
+difference_penalty: 2
+max_seq_length: 10000
+max_number_paths: 100

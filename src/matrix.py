@@ -1,3 +1,29 @@
+class Node:
+    def __init__(self, left, diag, top, config):
+        self.value = 0
+        self.left = left
+        self.diag = diag
+        self.top = top
+        self.config = config
+        self.paths = []
+
+    def compute_value(self, base_1, base_2):
+        left_value = self.left.value - self.config['gap_penalty']
+        top_value = self.top.value - self.config['gap_penalty']
+        if base_1 == base_2:
+            diag_value = self.diag.value + self.config['same_award']
+        else:
+            diag_value = self.diag.value - self.config['difference_penalty']
+
+        self.value = max(left_value, top_value, diag_value)
+        if left_value == self.value:
+            self.paths.append(self.left)
+        if diag_value == self.value:
+            self.paths.append(self.diag)
+        if top_value == self.value:
+            self.paths.append(self.top)
+
+
 def trim_sequences(seq_1, seq_2):
     """
     If called after checking sequences for equality, should work correctly.

@@ -1,4 +1,4 @@
-from src.matrix import build_matrix
+from matrix import build_matrix
 
 default_config = {
     "same_award": 2,

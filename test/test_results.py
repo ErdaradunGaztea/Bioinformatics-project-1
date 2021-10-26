@@ -1,6 +1,7 @@
 import numpy as np
 
 from src.matrix import build_matrix
+from src.path import follow_path
 
 default_config = {
     "same_award": 2,
@@ -22,3 +23,9 @@ def test_matrix():
         extract_value(matrix),
         np.array([[0, -1, -2, -3], [-1, -2, -3, -4], [-2, -3, -4, -5]])
     ).all()
+
+
+def test_score():
+    matrix = build_matrix(seq_1, seq_2, default_config)
+    paths = follow_path(matrix)
+    assert paths[0].score == -5

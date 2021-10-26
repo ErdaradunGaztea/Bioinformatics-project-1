@@ -77,12 +77,10 @@ def trim_sequences(seq_1, seq_2):
     return seq_1, seq_2, start_index, end_index
 
 
-def build_matrix(seq_1, seq_2, config):
-    if seq_1 == seq_2:
-        return None
-
-    seq_1_trim, seq_2_trim, start_index, end_index = trim_sequences(seq_1, seq_2)
-
+def build_matrix(seq_1_trim, seq_2_trim, config):
+    """
+    We assume that sequences are trimmed.
+    """
     nodes = np.empty((len(seq_1_trim) + 1, len(seq_2_trim) + 1), dtype=Node)
     nodes[0, 0] = CornerNode()
     for index in range(len(seq_1_trim)):

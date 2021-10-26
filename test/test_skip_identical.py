@@ -12,14 +12,6 @@ seq_2 = "MEINDMHDIWRLQLFHWCTHTFIFFWRRINNCLLTL"
 seq_3 = "KYNPMCILNWRLQLFHWCTHTFIFFWRWGKDEMEKH"
 
 
-def test_all_equal():
-    """
-    If both sequences are the same, do not create the matrix.
-    """
-    matrix = build_matrix(seq_1, seq_1, default_config)
-    assert matrix is None
-
-
 def test_trimmed_sequences():
     """
     Identical pre- and suffixes are removed.

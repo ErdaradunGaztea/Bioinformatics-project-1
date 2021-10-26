@@ -1,4 +1,4 @@
-from read_sequence import read_sequence
+from src.read_sequence import read_sequence
 
 
 def test_read_fasta():

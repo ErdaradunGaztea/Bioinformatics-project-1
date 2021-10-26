@@ -40,10 +40,18 @@ def test_score():
     assert score == -5
 
 
-def test_paths():
+def test_one_path():
     matrix = build_matrix(seq_3, seq_4, modified_config)
     paths, score = follow_path(matrix, seq_3, seq_4, modified_config)
     assert len(paths) == 1
     assert paths[0].seq_1 == "PAAD"
     assert paths[0].seq_2 == "MAAR"
     assert score == 0
+
+
+def test_multiple_paths():
+    matrix = build_matrix(seq_3, seq_4, default_config)
+    paths, score = follow_path(matrix, seq_3, seq_4, default_config)
+    assert len(paths) == 9
+    assert score == 0
+    assert "P-AA-D" in [path.seq_1 for path in paths]

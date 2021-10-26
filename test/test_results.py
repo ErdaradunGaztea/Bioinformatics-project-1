@@ -27,5 +27,5 @@ def test_matrix():
 
 def test_score():
     matrix = build_matrix(seq_1, seq_2, default_config)
-    paths = follow_path(matrix)
-    assert paths[0].score == -5
+    _, score = follow_path(matrix)
+    assert score == -5

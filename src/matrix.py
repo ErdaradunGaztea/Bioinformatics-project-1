@@ -15,7 +15,6 @@ class Node:
         self.diag = diag
         self.top = top
         self.config = config
-        self.paths = []
         self.directions = []
 
     def compute_value(self, base_1, base_2):
@@ -28,13 +27,10 @@ class Node:
 
         self.value = max(left_value, top_value, diag_value)
         if left_value == self.value:
-            self.paths.append(self.left)
             self.directions.append(Direction.LEFT)
         if diag_value == self.value:
-            self.paths.append(self.diag)
             self.directions.append(Direction.DIAGONAL)
         if top_value == self.value:
-            self.paths.append(self.top)
             self.directions.append(Direction.TOP)
 
         return self
@@ -43,15 +39,14 @@ class Node:
 class CornerNode:
     def __init__(self):
         self.value = 0
-        self.paths = []
         self.directions = []
 
 
 class EdgeNode:
-    def __init__(self, parent, config):
     def __init__(self, parent, direction, config):
         self.value = parent.value - config['gap_penalty']
-        self.paths = [parent]
+        self.left = parent if direction == Direction.LEFT else None
+        self.top = parent if direction == Direction.TOP else None
         self.directions = [direction]
 
 
@@ -91,10 +86,8 @@ def build_matrix(seq_1, seq_2, config):
     nodes = np.empty((len(seq_1_trim) + 1, len(seq_2_trim) + 1), dtype=Node)
     nodes[0, 0] = CornerNode()
     for index in range(len(seq_1_trim)):
-        nodes[1 + index, 0] = EdgeNode(nodes[index, 0], config)
         nodes[1 + index, 0] = EdgeNode(nodes[index, 0], Direction.TOP, config)
     for index in range(len(seq_2_trim)):
-        nodes[0, 1 + index] = EdgeNode(nodes[0, index], config)
         nodes[0, 1 + index] = EdgeNode(nodes[0, index], Direction.LEFT, config)
 
     # build actual matrix

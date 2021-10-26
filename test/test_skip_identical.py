@@ -1,3 +1,5 @@
+from src.matrix import build_matrix
+
 default_config = {
     "same_award": 2,
     "gap_penalty": 1,

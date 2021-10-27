@@ -20,6 +20,11 @@ if __name__ == "__main__":
     seq_2 = read_sequence(args.seq2)
     config = parse_config(args.config)
 
+    if len(seq_1) > config['max_seq_length']:
+        raise ValueError("Sequence 1 too long!")
+    if len(seq_2) > config['max_seq_length']:
+        raise ValueError("Sequence 2 too long!")
+
     sys.setrecursionlimit(config['max_seq_length'] * 2)
 
     # Default values when sequences are identical.
